@@ -4,8 +4,8 @@
   "description": "The eventers ",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon src/index.js"
+    "start": "nodemon src/index.js",
+    "testing": "node src/scripts/createSuperAdmin.js"
   },
   "repository": {
     "type": "git",
@@ -19,8 +19,10 @@
   "author": "suraj",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "dotenv": "^17.1.0",
     "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.16.2",
     "nodemon": "^3.1.10"
   }
