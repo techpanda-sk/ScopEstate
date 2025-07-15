@@ -1,4 +1,18 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { 
+  FaBell, 
+  FaSignOutAlt, 
+  FaPlus, 
+  FaStickyNote, 
+  FaTrash, 
+  FaSave, 
+  FaTimes,
+  FaEllipsisV,
+  FaEye,
+  FaEdit,
+  FaTrashAlt
+} from "react-icons/fa";
 
 function Navbar() {
   const [isStickyOpen, setIsStickyOpen] = useState(false);
@@ -12,7 +26,6 @@ function Navbar() {
   const toggleSticky = () => {
     setIsStickyOpen(!isStickyOpen);
     if (!isStickyOpen) {
-      // reset on open
       setNoteText("");
       setNoteColor("blue");
       setEditingNoteId(null);
@@ -25,7 +38,9 @@ function Navbar() {
     if (editingNoteId) {
       setNotes((prev) =>
         prev.map((note) =>
-          note.id === editingNoteId ? { ...note, color: noteColor, text: noteText } : note
+          note.id === editingNoteId
+            ? { ...note, color: noteColor, text: noteText }
+            : note
         )
       );
     } else {
@@ -64,23 +79,36 @@ function Navbar() {
     <div>
       {/* Navbar */}
       <div className="bg-white shadow p-4 flex justify-end gap-4 items-center sticky top-0 z-50">
-        <button className="text-sm bg-gray-200 px-4 py-2 rounded hover:bg-gray-300">
-          Clear Cache
+        <button 
+          className="text-sm cursor-pointer bg-gray-200 p-2 rounded hover:bg-gray-300"
+          title="Clear Cache"
+        >
+          <FaTrash />
         </button>
         <button
           onClick={toggleSticky}
-          className="text-sm bg-yellow-300 px-4 py-2 rounded hover:bg-yellow-400"
+          className="text-sm cursor-pointer bg-yellow-300 p-2 rounded hover:bg-yellow-400"
+          title="Sticky Note"
         >
-          Sticky Note
+          <FaStickyNote />
         </button>
-        <button className="text-sm bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
-          Create New
+        <button 
+          className="text-sm cursor-pointer bg-green-500 text-white p-2 rounded hover:bg-green-600"
+          title="Create New"
+        >
+          <FaPlus />
         </button>
-        <button className="text-sm bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-          🔔 Notification
+        <button 
+          className="text-sm cursor-pointer bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
+          title="Notifications"
+        >
+          <FaBell />
         </button>
-        <button className="text-sm bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
-          Logout
+        <button 
+          className="text-sm cursor-pointer bg-red-500 text-white p-2 rounded hover:bg-red-600"
+          title="Logout"
+        >
+          <FaSignOutAlt />
         </button>
       </div>
 
@@ -96,38 +124,43 @@ function Navbar() {
               <div className="absolute top-2 right-2">
                 <button
                   onClick={() =>
-                    setDropdownOpenId(dropdownOpenId === note.id ? null : note.id)
+                    setDropdownOpenId(
+                      dropdownOpenId === note.id ? null : note.id
+                    )
                   }
                   className="text-gray-500 hover:text-black"
+                  title="Actions"
                 >
-                  ⋮
+                  <FaEllipsisV />
                 </button>
 
                 {dropdownOpenId === note.id && (
                   <div className="absolute right-0 mt-2 bg-white border rounded shadow w-32 z-10">
                     <button
                       onClick={() => handleViewNote(note)}
-                      className="block w-full px-4 py-2 text-sm hover:bg-gray-100 text-left"
+                      className="flex items-center gap-2 w-full px-4 py-2 text-sm hover:bg-gray-100 text-left"
                     >
-                      View
+                      <FaEye /> View
                     </button>
                     <button
                       onClick={() => handleEditNote(note)}
-                      className="block w-full px-4 py-2 text-sm hover:bg-gray-100 text-left"
+                      className="flex items-center gap-2 w-full px-4 py-2 text-sm hover:bg-gray-100 text-left"
                     >
-                      Edit
+                      <FaEdit /> Edit
                     </button>
                     <button
                       onClick={() => handleDeleteNote(note.id)}
-                      className="block w-full px-4 py-2 text-sm hover:bg-gray-100 text-left text-red-500"
+                      className="flex items-center gap-2 w-full px-4 py-2 text-sm hover:bg-gray-100 text-left text-red-500"
                     >
-                      Delete
+                      <FaTrashAlt /> Delete
                     </button>
                   </div>
                 )}
               </div>
 
-              <p className="text-sm text-gray-700 whitespace-pre-line">{note.text}</p>
+              <p className="text-sm text-gray-700 whitespace-pre-line">
+                {note.text}
+              </p>
             </div>
           ))}
         </div>
@@ -135,16 +168,17 @@ function Navbar() {
 
       {/* Sticky Note Add/Edit Modal */}
       <div
-        className={`fixed top-0 left-0 h-full w-full bg-gray-100 z-50 transform transition-transform duration-300 ease-in-out ${
-          isStickyOpen ? "translate-x-0" : "-translate-x-full"
+        className={`fixed top-0 right-0 h-full w-full bg-gray-100 z-50 transform transition-transform duration-700 ease-in-out ${
+          isStickyOpen ? "translate-x-12" : "translate-x-full"
         }`}
       >
         {/* Close button */}
         <button
           onClick={toggleSticky}
-          className="absolute top-4 left-4 bg-red-500 text-white w-8 h-8 rounded-full flex items-center justify-center hover:bg-red-600 z-50"
+          className="absolute cursor-pointer top-4 left-4 bg-red-500 text-white w-8 h-8 rounded-full flex items-center justify-center hover:bg-red-600 z-50"
+          title="Close"
         >
-          &times;
+          <FaTimes />
         </button>
 
         <div className="flex items-start justify-center h-full pt-16">
@@ -158,7 +192,9 @@ function Navbar() {
 
               {/* Color dropdown */}
               <div className="mb-4">
-                <label className="block text-sm font-medium mb-1">Color Code</label>
+                <label className="block text-sm font-medium mb-1">
+                  Color Code
+                </label>
                 <select
                   value={noteColor}
                   onChange={(e) => setNoteColor(e.target.value)}
@@ -186,13 +222,13 @@ function Navbar() {
               <div className="flex gap-4 items-center">
                 <button
                   onClick={handleSaveNote}
-                  className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 flex items-center gap-2"
+                  className="bg-red-500 cursor-pointer text-white px-4 py-2 rounded hover:bg-red-600 flex items-center gap-2"
                 >
-                  <span>✔</span> Save
+                  <FaSave /> Save
                 </button>
                 <button
                   onClick={toggleSticky}
-                  className="text-sm text-gray-500 hover:underline"
+                  className="text-sm cursor-pointer text-gray-500 hover:underline"
                 >
                   Cancel
                 </button>
@@ -212,11 +248,16 @@ function Navbar() {
                 onClick={() => setViewingNote(null)}
                 className="bg-red-500 text-white w-8 h-8 rounded-full flex items-center justify-center hover:bg-red-600"
               >
-                &times;
+                <FaTimes />
               </button>
             </div>
-            <div className="border-l-4 p-4" style={{ borderColor: viewingNote.color }}>
-              <p className="text-gray-800 whitespace-pre-line">{viewingNote.text}</p>
+            <div
+              className="border-l-4 p-4"
+              style={{ borderColor: viewingNote.color }}
+            >
+              <p className="text-gray-800 whitespace-pre-line">
+                {viewingNote.text}
+              </p>
             </div>
           </div>
         </div>
