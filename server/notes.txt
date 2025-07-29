@@ -1,0 +1,16 @@
+baseUrl = http://localhost:3000
+
+npm run testing  - for create super admin first time
+
+
+{baseUrl}/api/v1/superadmin/companies - register company only super admin
+
+
+{baseUrl}/api/v1/admin/login - user login 
+{baseUrl}/api/v1/admin/register - super admin register
+{baseUrl}/api/v1/admin/:id - stickey for delete/update
+{baseUrl}/api/v1/admin/ - get All Stickey notes
+
+
+developersanju10
+EAAK0hnygmHsBPDuy4nAOmPjR0zxSZAdZCZCwRJUw10quTTq5RDW0YYjF8LEUNrZBkYux8rdypXAOvGS9bsK34xZCZBAT0PMXpi0ir8a7ZAQz29ZBO6ld6O94fdPf2OTDQ7E3Sa4mBVyUZAXSZCchp6tr7ZCMjkNWuNsbPZCsEhsDD9k3pYZB8EKZCYicmDOXo2yyTThmYQeBWQIttofRnuGhZBJz1GEU8aj6P1m3aj4sX8ZAcAwHGqfV2KrgYMmRTFoZC1QJZAGvHfe0ea6pgcL56qagZDZD

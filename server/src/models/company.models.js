@@ -1,56 +1,63 @@
-import mongoose from 'mongoose';
-
+const mongoose = require("mongoose");
 const { Schema } = mongoose;
-const companySchema = new Schema({
-    companyName: {
-        type: String,
-        required: true,
-        trim: true,
+const CompanySchema = new Schema(
+  {
+    company_name: {
+      type: String,
+      required: true,
+      trim: true,
     },
-    email: {
-        type: String,
-        required: true,
-        unique: true,
-        lowercase: true,
-        trim: true,
+    company_email: {
+      type: String,
+      required: true,
+      unique: true,
+      lowercase: true,
+      trim: true,
     },
-    phone: {
-        type: String,
-        required: true,
-        trim: true,
+    company_phone: {
+      type: String,
+      required: true,
+      trim: true,
     },
-    address: {
-        type: String,
-        default: '',
+    company_address: {
+      type: String,
     },
-    registrationNumber: {
-        type: String,
-        required: true,
-        unique: true,
+    company_registerno: {
+      type: String,
     },
     ownerName: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
-    password: {
-        type: String,
-        required: true,
-    },
-    logo: {
-        type: String,
-        default: '',
+    company_logo: {
+      type: String,
+      default: "",
     },
     companyType: {
-        type: String,
-        enum: ['Private Limited', 'Partnership', 'Sole Proprietorship', 'LLP', 'Other'],
-        required: true,
+      type: String,
+      enum: [
+        "Private Limited",
+        "Partnership",
+        "Sole Proprietorship",
+        "LLP",
+        "Other",
+      ],
+     // required: true,
     },
     establishedAt: {
-        type: Date,
-        required: true,
+      type: Date,
+      required: true,
     },
-}, {
+    superAdmin: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+  },
+  {
     timestamps: true,
-});
+  }
+);
 
-export default mongoose.model('Company', companySchema);
+const Company = mongoose.model("Company", CompanySchema);
+module.exports = { Company };
+
